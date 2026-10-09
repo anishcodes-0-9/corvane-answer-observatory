@@ -2,6 +2,7 @@
  * Contracts for brand detection. See docs/brand-analysis.md for the rules.
  */
 import type { EngineId, SourceLocation } from "./types";
+import type { Tone, ToneEvidence } from "./tone";
 
 export type BrandId = string;
 export type BrandTier = "client" | "tracked_competitors" | "other_companies";
@@ -129,6 +130,10 @@ export interface BrandResult {
   mentioned: boolean;
   /** 1-based order of first mention among brands; null if not mentioned. */
   position: number | null;
+  /** Final-verdict tone (see tone.ts); null if not mentioned. */
+  tone: Tone | null;
+  /** Non-neutral verdicts in text order; the last decides. Empty for neutral. */
+  toneEvidence: ToneEvidence[];
   /** All accepted matches for this brand, in text order. */
   matches: BrandMatch[];
 }
@@ -169,6 +174,7 @@ export interface BrandAnalysisSummary {
     tier: BrandTier;
     responsesMentioning: number;
     matches: Record<MatchType, number>;
+    tones: Record<Tone, number>;
   }>;
   decoyResponses: number;
   ambiguousCandidates: number;

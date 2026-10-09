@@ -125,3 +125,29 @@ The brief does not decide these, so they are conservative defaults pinned by tes
     `python3 -I validation/oracle.py labels validation/brand-labels.json`
   - Compared with the pipeline on real data:
     `python3 -I validation/oracle.py compare <responses file> out/brand-analysis.json`
+
+## Tone
+
+The brief's four values, with its rule: "If an answer is mixed about a
+company, use the tone of its final verdict on that company." Implemented in
+`src/lib/tone.ts`.
+
+1. **Split into sentences.** The answer is split into lines, and lines into
+   sentences; a table row is one sentence. A sentence belongs to the brands
+   named in it. A sentence naming none belongs to the last brand named earlier
+   on the same line ("Fleetora can feel expensive. Even so, it's the one I'd pick.").
+2. **Split into clauses.** Clauses are split at contrast words (but, though,
+   although, however, even so, that said). A sentence's verdict is the verdict
+   of its last clause that has one.
+3. **Clause verdicts.** not_recommended phrases are checked first ("avoid" as
+   advice, "wouldn't choose", "not the right fit", "overkill", "skip"), then
+   negative ones (complaints, outages, caution, clunky, limited, expensive),
+   then recommended ones (best overall, top pick, strong/safest/reliable
+   choice, hard to beat, I'd recommend/pick/start with, worth shortlisting).
+4. **Final tone.** A brand's tone is its last non-neutral verdict; neutral if none.
+
+**Limitations:**
+
+- When one sentence names two brands, both get its verdict.
+- The phrase lists are English-only and won't catch every phrasing.
+- Accuracy on real answers is measured by the manual audit, not assumed.

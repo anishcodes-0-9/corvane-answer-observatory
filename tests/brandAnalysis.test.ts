@@ -132,6 +132,7 @@ describe("summary and determinism", () => {
       tier: "client",
       responsesMentioning: 1,
       matches: { website: 1, name: 1, alias: 0, fuzzy: 1 },
+      tones: { recommended: 0, neutral: 1, negative: 0, not_recommended: 0 },
     });
   });
 
