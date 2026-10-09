@@ -10,7 +10,8 @@ over six weeks and works out:
 - a weekly visibility score that separates real movement from run-to-run noise.
 
 The results are shown in a web dashboard for the CEO and a browsable answer
-view, and exported in the brief's exact CSV formats.
+view, and exported in the brief's exact CSV formats. The plain-English
+summary for Marcus is in [NOTE_TO_MARCUS.md](NOTE_TO_MARCUS.md).
 
 Everything is rules-based and runs on a laptop: no paid APIs, no network calls
 at run time, and every number traces back to a specific answer.
