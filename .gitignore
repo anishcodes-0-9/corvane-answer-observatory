@@ -5,3 +5,7 @@ data/
 *.log
 # Generated outputs (reproducible from the data pack; never committed).
 out/
+# Next.js build output and generated type stubs.
+.next/
+next-env.d.ts
+*.tsbuildinfo
