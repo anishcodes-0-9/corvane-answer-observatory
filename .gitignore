@@ -9,3 +9,6 @@ out/
 .next/
 next-env.d.ts
 *.tsbuildinfo
+# Manual-review sheets contain answer text from the data pack; only the results file is committed.
+validation/manual-review.csv
+validation/manual-review-predictions.csv
