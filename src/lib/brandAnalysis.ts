@@ -38,7 +38,7 @@ export function analyzeResponse(r: NormalizedResponse, catalog: BrandCatalog): R
   for (const m of matches) if (!firstAt.has(m.brand)) firstAt.set(m.brand, m.start);
   const order = [...firstAt.entries()].sort((a, b) => a[1] - b[1]).map(([brand]) => brand);
 
-  const tones = classifyTones(r.text, matches);
+  const tones = classifyTones(r.text, matches, decoys);
   const brands: BrandResult[] = catalog.brands.map((b) => {
     const own = matches.filter((m) => m.brand === b.id);
     const rank = order.indexOf(b.id);

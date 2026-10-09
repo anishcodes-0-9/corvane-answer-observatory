@@ -139,28 +139,63 @@ function splitSentences(line: string): Array<{ s: number; e: number }> {
   return out;
 }
 
-export function classifyTones(text: string, matches: readonly BrandMatch[]): Map<BrandId, BrandTone> {
-  const result = new Map<BrandId, BrandTone>();
-  for (const m of matches) if (!result.has(m.brand)) result.set(m.brand, { tone: "neutral", evidence: [] });
+export interface OwnedSentence {
+  start: number;
+  end: number;
+  text: string;
+  /** Brands the sentence is about: those named in it, or the carried-over brand. */
+  brands: BrandId[];
+  /** True when the brands were carried over from an earlier sentence on the same line. */
+  carried: boolean;
+}
 
+/**
+ * Which brands each sentence is about. A sentence naming no brand belongs to
+ * the last brand named earlier on the same line ("It's based in Ohio."). A
+ * sentence that names a decoy (e.g. Corvane Logistics) and no brand belongs to
+ * nobody and ends the carry-over, so a decoy's details never land on a brand.
+ */
+export function attributeSentences(
+  text: string,
+  matches: readonly BrandMatch[],
+  decoys: ReadonlyArray<{ start: number; end: number }> = [],
+): OwnedSentence[] {
+  const out: OwnedSentence[] = [];
   let carryLine = -1;
   let carryBrand: BrandId | null = null;
   for (const sent of sentences(text)) {
     const inside = matches.filter((m) => m.start >= sent.start && m.start < sent.end);
-    let owners: BrandId[];
-    if (inside.length > 0) owners = [...new Set(inside.map((m) => m.brand))];
-    else if (carryBrand && carryLine === sent.line) owners = [carryBrand];
-    else owners = [];
+    const hasDecoy = decoys.some((d) => d.start >= sent.start && d.start < sent.end);
+    let brands: BrandId[] = [];
+    let carried = false;
     if (inside.length > 0) {
+      brands = [...new Set(inside.map((m) => m.brand))];
       carryBrand = inside[inside.length - 1]!.brand;
       carryLine = sent.line;
+    } else if (hasDecoy) {
+      carryBrand = null;
+    } else if (carryBrand && carryLine === sent.line) {
+      brands = [carryBrand];
+      carried = true;
     }
-    if (owners.length === 0) continue;
-    const sentence = text.slice(sent.start, sent.end);
-    const verdict = sentenceVerdict(sentence);
+    out.push({ start: sent.start, end: sent.end, text: text.slice(sent.start, sent.end), brands, carried });
+  }
+  return out;
+}
+
+export function classifyTones(
+  text: string,
+  matches: readonly BrandMatch[],
+  decoys: ReadonlyArray<{ start: number; end: number }> = [],
+): Map<BrandId, BrandTone> {
+  const result = new Map<BrandId, BrandTone>();
+  for (const m of matches) if (!result.has(m.brand)) result.set(m.brand, { tone: "neutral", evidence: [] });
+  for (const sent of attributeSentences(text, matches, decoys)) {
+    if (sent.brands.length === 0) continue;
+    const verdict = sentenceVerdict(sent.text);
     if (!verdict) continue;
-    for (const brand of owners) {
-      result.get(brand)!.evidence.push({ ...verdict, sentence, start: sent.start, end: sent.end });
+    for (const brand of sent.brands) {
+      result.get(brand)!.evidence.push({ ...verdict, sentence: sent.text, start: sent.start, end: sent.end });
     }
   }
   for (const t of result.values()) {
