@@ -1,0 +1,899 @@
+{
+  "_note": "Hand-labelled brand-mention cases, written from the brief's definitions (not from tool output). 'mentions' lists brands in position order with every surface form expected for that brand, in text order. 'decoys' lists decoy surfaces. Tags: 'brief' = decided by the brief; 'contract-default' = the brief is silent and docs/brand-analysis.md chose a conservative default. 'unresolved' cases are documented but not scored.",
+  "cases": [
+    {
+      "id": "L01",
+      "tags": [
+        "brief",
+        "name"
+      ],
+      "text": "Corvane Fleet is a strong pick.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane Fleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L02",
+      "tags": [
+        "brief",
+        "alias"
+      ],
+      "text": "Choose Corvane for compliance.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L03",
+      "tags": [
+        "brief",
+        "case"
+      ],
+      "text": "CORVANE FLEET and corvane fleet.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "CORVANE FLEET",
+            "corvane fleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L04",
+      "tags": [
+        "brief",
+        "joined"
+      ],
+      "text": "CorvaneFleet integrates with QuickBooks.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "CorvaneFleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L05",
+      "tags": [
+        "brief",
+        "website"
+      ],
+      "text": "Start at corvanefleet.com.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "corvanefleet.com"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L06",
+      "tags": [
+        "brief",
+        "punctuation"
+      ],
+      "text": "Corvane's driver app (Corvane) is solid.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane",
+            "Corvane"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L07",
+      "tags": [
+        "brief",
+        "punctuation"
+      ],
+      "text": "Corvane-based fleets save fuel.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L08",
+      "tags": [
+        "brief",
+        "misspelling"
+      ],
+      "text": "Corvain Fleet is the safest choice.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvain Fleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L09",
+      "tags": [
+        "brief",
+        "misspelling"
+      ],
+      "text": "Buyers say Corvain costs a little more than rivals.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvain"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L10",
+      "tags": [
+        "brief",
+        "misspelling",
+        "case"
+      ],
+      "text": "CORVAIN leads the market.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "CORVAIN"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L11",
+      "tags": [
+        "brief",
+        "false-positive"
+      ],
+      "text": "Corvina grapes make a light red wine.",
+      "mentions": []
+    },
+    {
+      "id": "L12",
+      "tags": [
+        "contract-default",
+        "misspelling"
+      ],
+      "text": "Corvina Fleet is a strong pick.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvina Fleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L13",
+      "tags": [
+        "brief",
+        "misspelling"
+      ],
+      "text": "Trackvia and Routeline are options.",
+      "mentions": [
+        [
+          "trakvia",
+          [
+            "Trackvia"
+          ]
+        ],
+        [
+          "routelyne",
+          [
+            "Routeline"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L14",
+      "tags": [
+        "brief",
+        "misspelling"
+      ],
+      "text": "Gridwel is fine for big fleets.",
+      "mentions": [
+        [
+          "gridwell",
+          [
+            "Gridwel"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L15",
+      "tags": [
+        "brief",
+        "misspelling"
+      ],
+      "text": "Novahual dispatches crews.",
+      "mentions": [
+        [
+          "novahaul",
+          [
+            "Novahual"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L16",
+      "tags": [
+        "brief",
+        "misspelling"
+      ],
+      "text": "Fleetorra analytics are detailed.",
+      "mentions": [
+        [
+          "fleetora",
+          [
+            "Fleetorra"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L17",
+      "tags": [
+        "brief",
+        "decoy"
+      ],
+      "text": "Corvane Logistics moves pallets between depots.",
+      "mentions": [],
+      "decoys": [
+        "Corvane Logistics"
+      ]
+    },
+    {
+      "id": "L18",
+      "tags": [
+        "brief",
+        "decoy",
+        "singular"
+      ],
+      "text": "Corvane Logistic moves pallets between depots.",
+      "mentions": [],
+      "decoys": [
+        "Corvane Logistic"
+      ]
+    },
+    {
+      "id": "L19",
+      "tags": [
+        "brief",
+        "decoy",
+        "case"
+      ],
+      "text": "This is unrelated to CORVANE LOGISTICS.",
+      "mentions": [],
+      "decoys": [
+        "CORVANE LOGISTICS"
+      ]
+    },
+    {
+      "id": "L20",
+      "tags": [
+        "brief",
+        "decoy",
+        "joined"
+      ],
+      "text": "CorvaneLogistics ships LTL freight.",
+      "mentions": [],
+      "decoys": [
+        "CorvaneLogistics"
+      ]
+    },
+    {
+      "id": "L21",
+      "tags": [
+        "brief",
+        "decoy",
+        "misspelling"
+      ],
+      "text": "Corvain Logistics ships LTL freight.",
+      "mentions": [],
+      "decoys": [
+        "Corvain Logistics"
+      ]
+    },
+    {
+      "id": "L22",
+      "tags": [
+        "brief",
+        "decoy"
+      ],
+      "text": "Corvane Fleet is great. It is unrelated to Corvane Logistics, a haulage firm.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane Fleet"
+          ]
+        ]
+      ],
+      "decoys": [
+        "Corvane Logistics"
+      ]
+    },
+    {
+      "id": "L23",
+      "tags": [
+        "contract-default",
+        "decoy"
+      ],
+      "text": "The Corvane Fleet Logistics module is new.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane Fleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L24",
+      "tags": [
+        "brief",
+        "decoy",
+        "punctuation"
+      ],
+      "text": "We chose Corvane, logistics aside.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvane"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L25",
+      "tags": [
+        "brief",
+        "decoy",
+        "punctuation"
+      ],
+      "text": "Corvane Logistics' dispatchers are responsive.",
+      "mentions": [],
+      "decoys": [
+        "Corvane Logistics"
+      ]
+    },
+    {
+      "id": "L26",
+      "tags": [
+        "brief",
+        "name",
+        "website"
+      ],
+      "text": "Route Lyne, RouteLyne and routelyne.com.",
+      "mentions": [
+        [
+          "routelyne",
+          [
+            "Route Lyne",
+            "RouteLyne",
+            "routelyne.com"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L27",
+      "tags": [
+        "brief",
+        "alias",
+        "website"
+      ],
+      "text": "Gridwell Systems, GridWell and gridwell.io.",
+      "mentions": [
+        [
+          "gridwell",
+          [
+            "Gridwell Systems",
+            "GridWell",
+            "gridwell.io"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L28",
+      "tags": [
+        "brief",
+        "name"
+      ],
+      "text": "Nova Haul and NovaHaul dispatch.",
+      "mentions": [
+        [
+          "novahaul",
+          [
+            "Nova Haul",
+            "NovaHaul"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L29",
+      "tags": [
+        "brief",
+        "website",
+        "punctuation"
+      ],
+      "text": "Trakvia's dashcams; see https://www.trakvia.com/pricing.",
+      "mentions": [
+        [
+          "trakvia",
+          [
+            "Trakvia",
+            "https://www.trakvia.com/pricing"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L30",
+      "tags": [
+        "brief",
+        "false-positive"
+      ],
+      "text": "Trivia night, a Corvette, Routine checks, Gridiron, Fleetwood Mac, a Novella.",
+      "mentions": []
+    },
+    {
+      "id": "L31",
+      "tags": [
+        "brief",
+        "false-positive"
+      ],
+      "text": "Fleet tracking for a fleet of trucks along a route.",
+      "mentions": []
+    },
+    {
+      "id": "L32",
+      "tags": [
+        "brief",
+        "boundary"
+      ],
+      "text": "Gridwellness and MegaTrakvia are unrelated.",
+      "mentions": []
+    },
+    {
+      "id": "L33",
+      "tags": [
+        "contract-default",
+        "website",
+        "boundary"
+      ],
+      "text": "Email sales@trakvia.com or visit notgridwell.io today.",
+      "mentions": [
+        [
+          "trakvia",
+          [
+            "trakvia.com"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L34",
+      "tags": [
+        "contract-default",
+        "misspelling",
+        "case"
+      ],
+      "text": "the corvain incident was minor.",
+      "mentions": []
+    },
+    {
+      "id": "L35",
+      "tags": [
+        "brief",
+        "boundary"
+      ],
+      "text": "Route\nLyne",
+      "mentions": []
+    },
+    {
+      "id": "L36",
+      "tags": [
+        "brief",
+        "overlap"
+      ],
+      "text": "Trakvia Routelyne",
+      "mentions": [
+        [
+          "trakvia",
+          [
+            "Trakvia"
+          ]
+        ],
+        [
+          "routelyne",
+          [
+            "Routelyne"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L37",
+      "tags": [
+        "brief",
+        "position",
+        "table"
+      ],
+      "text": "| Provider | Our take |\n|---|---|\n| Routelyne | Top pick |\n| Gridwell Systems | Alternative |\n\nI'd pick gridwell.io or Fleetora.",
+      "mentions": [
+        [
+          "routelyne",
+          [
+            "Routelyne"
+          ]
+        ],
+        [
+          "gridwell",
+          [
+            "Gridwell Systems",
+            "gridwell.io"
+          ]
+        ],
+        [
+          "fleetora",
+          [
+            "Fleetora"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L38",
+      "tags": [
+        "brief",
+        "position",
+        "repeat"
+      ],
+      "text": "Novahaul, then Trakvia, then Novahaul again.",
+      "mentions": [
+        [
+          "novahaul",
+          [
+            "Novahaul",
+            "Novahaul"
+          ]
+        ],
+        [
+          "trakvia",
+          [
+            "Trakvia"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L39",
+      "tags": [
+        "contract-default",
+        "overlap"
+      ],
+      "text": "Gridwell System works well.",
+      "mentions": [
+        [
+          "gridwell",
+          [
+            "Gridwell"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L40",
+      "tags": [
+        "contract-default",
+        "overlap",
+        "misspelling"
+      ],
+      "text": "Corvan Flet works well.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvan"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L41",
+      "tags": [
+        "brief",
+        "citations"
+      ],
+      "text": "Fleet tracking costs vary.",
+      "citations": [
+        "https://corvanefleet.com/pricing",
+        "https://www.trakvia.com/"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "L42",
+      "tags": [
+        "brief",
+        "citations"
+      ],
+      "text": "Fleetora is cheap.",
+      "citations": [
+        "http://corvanefleet.com"
+      ],
+      "mentions": [
+        [
+          "fleetora",
+          [
+            "Fleetora"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L43",
+      "tags": [
+        "brief",
+        "unicode"
+      ],
+      "text": "Ask about Corvané Fleet today.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvané Fleet"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L44",
+      "tags": [
+        "brief",
+        "unicode"
+      ],
+      "text": "GRİDWELL leads the enterprise market.",
+      "mentions": [
+        [
+          "gridwell",
+          [
+            "GRİDWELL"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L45",
+      "tags": [
+        "brief",
+        "unicode"
+      ],
+      "text": "Ｔｒａｋｖｉａ is written in fullwidth.",
+      "mentions": [
+        [
+          "trakvia",
+          [
+            "Ｔｒａｋｖｉａ"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L46",
+      "tags": [
+        "brief",
+        "unicode",
+        "offsets"
+      ],
+      "text": "🚚 Novahaul delivers.",
+      "mentions": [
+        [
+          "novahaul",
+          [
+            "Novahaul"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L47",
+      "tags": [
+        "brief",
+        "unicode"
+      ],
+      "text": "Grid​well scales.",
+      "mentions": [
+        [
+          "gridwell",
+          [
+            "Grid​well"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L48",
+      "tags": [
+        "brief",
+        "unicode"
+      ],
+      "text": "Corvané decomposed accent.",
+      "mentions": [
+        [
+          "corvane",
+          [
+            "Corvané"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L49",
+      "tags": [
+        "brief",
+        "position"
+      ],
+      "text": "Quick list:\n- Fleetora is fine.\n- RouteLyne is popular.\n- For compliance: Corvane. It is based in Ohio.\n- Trakvia focuses on dashcams.",
+      "mentions": [
+        [
+          "fleetora",
+          [
+            "Fleetora"
+          ]
+        ],
+        [
+          "routelyne",
+          [
+            "RouteLyne"
+          ]
+        ],
+        [
+          "corvane",
+          [
+            "Corvane"
+          ]
+        ],
+        [
+          "trakvia",
+          [
+            "Trakvia"
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "L50",
+      "tags": [
+        "brief",
+        "decoy",
+        "position"
+      ],
+      "text": "Corvane Logistics is unrelated. Trakvia and Corvane Fleet are both fleet tools.",
+      "mentions": [
+        [
+          "trakvia",
+          [
+            "Trakvia"
+          ]
+        ],
+        [
+          "corvane",
+          [
+            "Corvane Fleet"
+          ]
+        ]
+      ],
+      "decoys": [
+        "Corvane Logistics"
+      ]
+    },
+    {
+      "id": "L51",
+      "tags": [
+        "contract-default",
+        "misspelling",
+        "boundary"
+      ],
+      "text": "The Corvanes of this market charge more.",
+      "mentions": []
+    },
+    {
+      "id": "L52",
+      "tags": [
+        "contract-default",
+        "misspelling",
+        "boundary"
+      ],
+      "text": "Corvanex is a new entrant.",
+      "mentions": []
+    },
+    {
+      "id": "L53",
+      "tags": [
+        "contract-default",
+        "website",
+        "boundary"
+      ],
+      "text": "Visit gridwell.io.example.com or routelyne.io for details.",
+      "mentions": []
+    },
+    {
+      "id": "L54",
+      "tags": [
+        "brief",
+        "website",
+        "punctuation"
+      ],
+      "text": "I'd pick Gridwell.Next, consider www.Trakvia.com and Novahaul.",
+      "mentions": [
+        [
+          "gridwell",
+          [
+            "Gridwell"
+          ]
+        ],
+        [
+          "trakvia",
+          [
+            "www.Trakvia.com"
+          ]
+        ],
+        [
+          "novahaul",
+          [
+            "Novahaul"
+          ]
+        ]
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U03",
+      "text": "Corvane logistics tools are basic.",
+      "question": "Lower-case 'logistics' after Corvane: decoy or a description of Corvane? Treated as the decoy.",
+      "currentBehaviour": "decoy (no mention)"
+    },
+    {
+      "id": "U04",
+      "text": "Rout Lyne is cheap.",
+      "question": "Spaced misspelling of a one-word name; the brief does not say whether this is 'obvious'.",
+      "currentBehaviour": "no match"
+    }
+  ]
+}

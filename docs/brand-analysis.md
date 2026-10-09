@@ -111,3 +111,17 @@ The brief does not decide these, so they are conservative defaults pinned by tes
 - A lower-case qualifier straight after the head ("Corvane logistics tools") is
   treated as the decoy, because the brief says it "never counts".
 - A misspelled qualifier ("Corvane Logisitcs") is not recognised as the decoy.
+
+## Validation
+
+- `validation/brand-labels.json`: hand-labelled cases written from the
+  definitions above, with synthetic text. They are tagged `brief` where the
+  brief decides the answer, and `contract-default` where this document chose a
+  conservative default. `tests/brandLabels.test.ts` checks every label,
+  including exact offsets.
+- `validation/oracle.py`: an independent, deliberately naive regex
+  implementation (stdlib only).
+  - Scored against the same labels:
+    `python3 -I validation/oracle.py labels validation/brand-labels.json`
+  - Compared with the pipeline on real data:
+    `python3 -I validation/oracle.py compare <responses file> out/brand-analysis.json`
