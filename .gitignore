@@ -3,3 +3,5 @@ node_modules/
 data/
 .DS_Store
 *.log
+# Generated outputs (reproducible from the data pack; never committed).
+out/

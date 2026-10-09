@@ -1,0 +1,31 @@
+{
+  "_note": "Maps brands.json companies (joined by website) to the brief's brand IDs, in mentions.csv order. Aliases are short names the brief itself uses. Official names and websites always match and come from brands.json. See docs/brand-analysis.md.",
+  "brandsFile": "brands.json",
+  "brands": [
+    { "id": "corvane", "website": "corvanefleet.com", "aliases": ["Corvane"] },
+    { "id": "trakvia", "website": "trakvia.com", "aliases": [] },
+    { "id": "routelyne", "website": "routelyne.com", "aliases": [] },
+    { "id": "gridwell", "website": "gridwell.io", "aliases": ["Gridwell"] },
+    { "id": "fleetora", "website": "fleetora.com", "aliases": [] },
+    { "id": "novahaul", "website": "novahaul.com", "aliases": [] }
+  ],
+  "decoys": [
+    {
+      "id": "corvane_logistics",
+      "name": "Corvane Logistics",
+      "brand": "corvane",
+      "qualifiers": ["Logistics"],
+      "_note": "Unrelated freight company named in the brief. Never counts as Corvane."
+    }
+  ],
+  "fuzzy": {
+    "enabled": true,
+    "minKeyLength": 6,
+    "sharedPrefix": 3,
+    "maxDistanceShort": 1,
+    "maxDistanceLong": 2,
+    "longKeyLength": 7,
+    "requireCapitalInitial": true,
+    "rejectDictionaryWords": true
+  }
+}
