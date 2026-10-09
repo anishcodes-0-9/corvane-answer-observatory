@@ -25,7 +25,7 @@ describe("name forms", () => {
     ["Nova Haul dispatches.", "novahaul", "Nova Haul", "name"],
     ["Trakvia's dashcams.", "trakvia", "Trakvia", "name"],
     ["1. **Novahaul**: scheduling", "novahaul", "Novahaul", "name"],
-    ["| Fleetora | Fuel control | Top pick |", "fleetora", "Fleetora", "name"],
+    ["| Fleetora | Fuel savings | First choice |", "fleetora", "Fleetora", "name"],
   ])("%j → %s", (text, brand, surface, type) => {
     expect(summary(text)).toEqual([[brand, surface, type]]);
   });

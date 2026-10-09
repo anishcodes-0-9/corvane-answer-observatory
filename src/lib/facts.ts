@@ -18,7 +18,7 @@
  *
  * Claims are attributed to a brand with the same sentence ownership as tone:
  * the brand named in the sentence, or the last brand named earlier on the same
- * line ("It's based in Columbus, Georgia."). Sentences about a decoy are never
+ * line ("It is based in Springfield."). Sentences about a decoy are never
  * attributed to a brand.
  */
 import type { BrandId, BrandMatch } from "./brandTypes";

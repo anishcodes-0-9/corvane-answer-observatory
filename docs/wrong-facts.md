@@ -48,14 +48,14 @@ Georgia."). These are never attributed to Corvane:
 
 47 rows in 47 answers:
 
-| fact_key | Rows | Example claim |
+| fact_key | Rows | What the answers claimed (paraphrased) |
 |---|---|---|
-| `hq` | 14 | "It's based in Columbus, Georgia." / "The company is headquartered in Chicago." |
-| `founded` | 6 | "It was founded in 2009." |
-| `starting_price_usd` | 10 | "around $45" / "from $49" per vehicle |
-| `features.eld_compliance` | 8 | "doesn't support ELD compliance" |
-| `integrations` | 5 | "doesn't integrate with QuickBooks" |
-| `features.dashcams` | 4 | "includes built-in AI dashcams" |
+| `hq` | 14 | Columbus, Georgia or Chicago, instead of Columbus, Ohio |
+| `founded` | 6 | 2009, instead of 2014 |
+| `starting_price_usd` | 10 | $45 or $49 per vehicle, instead of $29 |
+| `features.eld_compliance` | 8 | no ELD compliance, though Corvane has it |
+| `integrations` | 5 | no QuickBooks integration, though Corvane has one |
+| `features.dashcams` | 4 | built-in dashcams, which Corvane does not have |
 
 Correct claims are not flagged: Columbus, Ohio; 2014; $29; QuickBooks and WEX;
 ELD included.

@@ -40,7 +40,7 @@ describe("mixed answers use the final verdict", () => {
 describe("tables and lists", () => {
   it("reads the verdict column of a markdown table row", () => {
     const text = [
-      "| Provider | Best for | Our take |",
+      "| Vendor | Ideal for | Verdict |",
       "|---|---|---|",
       "| Corvane Fleet | Small fleets | Top pick |",
       "| Trakvia | Video safety | Worth comparing |",
