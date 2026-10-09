@@ -225,7 +225,7 @@ export default function Overview() {
         </div>
         <table className="market">
           <thead>
-            <tr><th>Company</th><th>Score</th><th>Mentioned in</th><th className="hide-sm">Recommended in</th><th className="hide-sm">Change vs W{change?.fromWeek ?? "—"}</th></tr>
+            <tr><th>Company</th><th>Score</th><th>Mentioned in</th><th>Recommended in</th><th>Change vs W{change?.fromWeek ?? "—"}</th></tr>
           </thead>
           <tbody>
             {d.brands.map((b) => {
@@ -233,10 +233,10 @@ export default function Overview() {
               return (
                 <tr key={b.id} className={b.tracked ? "" : "other"}>
                   <td className="brand"><i style={{ background: BRAND_COLOR[b.id] }} />{b.name}{!b.tracked && <span className="eyebrow" style={{ marginLeft: 10 }}>detected</span>}</td>
-                  <td>{b.weeks[latestIdx]!.score?.toFixed(1) ?? "—"}</td>
-                  <td><span className="meter"><span style={{ width: pct(b.latestMentionRate) }} /></span>{pct(b.latestMentionRate)}</td>
-                  <td className="hide-sm">{pct(b.latestRecommendRate)}</td>
-                  <td className="hide-sm">{c ? `${signed(c.meanChange)} · ${VERDICT[c.verdict].toLowerCase()}` : "—"}</td>
+                  <td data-label="Score">{b.weeks[latestIdx]!.score?.toFixed(1) ?? "—"}</td>
+                  <td data-label="Mentioned in"><span className="meter"><span style={{ width: pct(b.latestMentionRate) }} /></span>{pct(b.latestMentionRate)}</td>
+                  <td data-label="Recommended in">{pct(b.latestRecommendRate)}</td>
+                  <td data-label={`Change vs W${change?.fromWeek ?? "—"}`}>{c ? `${signed(c.meanChange)} · ${VERDICT[c.verdict].toLowerCase()}` : "—"}</td>
                 </tr>
               );
             })}

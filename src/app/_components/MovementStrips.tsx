@@ -26,6 +26,7 @@ export default function MovementStrips({ brands, partialWeeks }: { brands: Strip
 
   return (
     <div>
+      <p className="scroll-hint" aria-hidden="true">Swipe sideways for every week-on-week change →</p>
       <div className="strips" style={{ ["--cols" as string]: cols.length }} role="grid" aria-label="Week-on-week change with 95% intervals">
         <div className="hd" role="columnheader">Company</div>
         {cols.map((c) => (

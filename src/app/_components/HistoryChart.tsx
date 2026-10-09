@@ -20,6 +20,8 @@ export default function HistoryChart({ weeks, series, engineLabel }: { weeks: Hi
 
   return (
     <div className="chart-wrap">
+      <p className="scroll-hint" aria-hidden="true">Swipe sideways to see all {weeks.length} weeks →</p>
+      <div className="chart-inner">
       <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Weekly visibility scores for ${series.map((s) => s.name).join(", ")}. Axis from 0 to ${yMax} on a 0 to 100 scale.`}>
         <defs>
           <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -66,7 +68,7 @@ export default function HistoryChart({ weeks, series, engineLabel }: { weeks: Hi
                 ),
               )}
               {isClient && s.values[s.values.length - 1] !== null && (
-                <text x={x(s.values.length - 1) + 12} y={y(s.values[s.values.length - 1]!) + 4} style={{ fill: s.color, fontSize: 13 }}>
+                <text x={x(s.values.length - 1) + 12} y={y(s.values[s.values.length - 1]!) + 4} className="end-label" style={{ fill: s.color }}>
                   {s.values[s.values.length - 1]!.toFixed(1)}
                 </text>
               )}
@@ -111,6 +113,7 @@ export default function HistoryChart({ weeks, series, engineLabel }: { weeks: Hi
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }

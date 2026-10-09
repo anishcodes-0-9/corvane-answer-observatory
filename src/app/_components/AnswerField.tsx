@@ -37,6 +37,9 @@ function layout(p: FieldPoint, weeks: number, prompts: number) {
   return { x, z };
 }
 
+/** Must match the CSS breakpoint where the field leaves the headline and gets its own band. */
+const BAND_QUERY = "(max-width: 1080px)";
+
 function hasWebGL(): boolean {
   try {
     const c = document.createElement("canvas");
@@ -51,9 +54,15 @@ export default function AnswerField({ points, weeks, prompts, partialLabel }: { 
   const labels = useRef<Array<HTMLSpanElement | null>>([]);
   const gapLabel = useRef<HTMLSpanElement>(null);
   const [mode, setMode] = useState<"pending" | "webgl" | "fallback">("pending");
+  const [band, setBand] = useState(false);
 
   useEffect(() => {
     setMode(hasWebGL() ? "webgl" : "fallback");
+    const mq = window.matchMedia(BAND_QUERY);
+    const sync = () => setBand(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
   useEffect(() => {
@@ -168,7 +177,9 @@ export default function AnswerField({ points, weeks, prompts, partialLabel }: { 
         });
         if (gapLabel.current && partialLabel) {
           const wi = weeks.indexOf(partialLabel.week);
-          v.set((wi + 1 - (weeks.length + 1) / 2) * COL + (partialLabel.engine - 1) * LANE, 2.15, 0);
+          // Band layout: centre the (wrapped) note over the whole week column, clear of the tallest points.
+          const band = window.matchMedia(BAND_QUERY).matches;
+          v.set((wi + 1 - (weeks.length + 1) / 2) * COL + (band ? 0 : (partialLabel.engine - 1) * LANE), band ? 2.45 : 2.15, 0);
           group.localToWorld(v);
           v.project(camera);
           gapLabel.current.style.transform = `translate(${((v.x + 1) / 2) * w}px, ${((1 - v.y) / 2) * h}px) translate(-50%, -100%)`;
@@ -183,16 +194,19 @@ export default function AnswerField({ points, weeks, prompts, partialLabel }: { 
         renderer.domElement.style.width = `${w}px`;
         renderer.domElement.style.height = `${h}px`;
         camera.aspect = w / h;
-        const wide = w / h > 1.25;
-        // Narrow: frame the six columns (~9 units wide) to fill the band.
+        // Wide: the field sits behind and right of the headline. Band (narrow
+        // layouts): the field has its own full-width row, so frame the six
+        // columns (~9 units wide plus labels) to fill it, centred.
+        const wide = !window.matchMedia(BAND_QUERY).matches && w / h > 1.25;
         camera.fov = wide ? 26 : 30;
-        camera.position.set(0, wide ? 4.2 : 3.4, wide ? 21 : Math.max(12, 10.6 / (2 * Math.tan((15 * Math.PI) / 180) * (w / h))));
+        camera.position.set(0, wide ? 4.2 : 3.4, wide ? 21 : Math.max(10.5, 10.6 / (2 * Math.tan((15 * Math.PI) / 180) * (w / h))));
         camera.lookAt(0, 0.4, 0);
         camera.updateProjectionMatrix();
         // Wide screens: the field sits right of the headline. Narrow: centred, above the fold copy.
         group.position.x = wide ? 3.3 : 0;
         group.position.y = wide ? 0.2 : -0.3;
-        mat.uniforms.uScale!.value = Math.min(window.devicePixelRatio, 2) * (wide ? 1 : 0.85);
+        // Smaller points in the narrow band so neighbouring answers stay distinguishable.
+        mat.uniforms.uScale!.value = Math.min(window.devicePixelRatio, 2) * (wide ? 1 : 0.7);
         renderer.render(scene, camera);
         placeLabels(w, h);
       };
@@ -260,33 +274,42 @@ export default function AnswerField({ points, weeks, prompts, partialLabel }: { 
             </span>
           ))}
           {partialLabel && (
-            <span ref={gapLabel} className="eyebrow field-gap-label" style={{ position: "absolute", left: 0, top: 0, color: "var(--sand)", whiteSpace: "nowrap" }}>
+            <span ref={gapLabel} className="eyebrow field-gap-label" style={{ position: "absolute", left: 0, top: 0, color: "var(--sand)" }}>
               {partialLabel.text}
             </span>
           )}
         </div>
       )}
-      {mode === "fallback" && <FallbackField points={points} weeks={weeks} prompts={prompts} />}
+      {mode === "fallback" && <FallbackField points={points} weeks={weeks} prompts={prompts} band={band} />}
     </div>
   );
 }
 
-function FallbackField({ points, weeks, prompts }: { points: FieldPoint[]; weeks: number[]; prompts: number }) {
-  const W = 1000;
-  const H = 420;
+function FallbackField({ points, weeks, prompts, band }: { points: FieldPoint[]; weeks: number[]; prompts: number; band: boolean }) {
+  // Wide: drawn in the right part of the hero, clear of the headline column.
+  // Band: its own full-width row, centred and spread out so weeks stay legible.
+  const g = band
+    ? { W: 640, H: 300, cx: 320, sx: 64, sz: 8, base: 0.7, sy: 105, dz: 16, label: 20 }
+    : { W: 1000, H: 420, cx: 700, sx: 46, sz: 10, base: 0.7, sy: 120, dz: 22, label: 12 };
+  const floorY = g.H * g.base;
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMaxYMid meet" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+    <svg viewBox={`0 0 ${g.W} ${g.H}`} preserveAspectRatio={band ? "xMidYMid meet" : "xMaxYMid meet"} style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
       {points.map((p, i) => {
         const s = STYLE[p.state] ?? STYLE.absent!;
         const { x, z } = layout(p, weeks.length, prompts);
-        const cx = W * 0.62 + x * 46 + z * 10;
-        const cy = H * 0.7 - s.y * 120 - z * 22;
+        const cx = g.cx + x * g.sx + z * g.sz;
+        const cy = floorY - s.y * g.sy - z * g.dz;
         return s.ring ? (
           <circle key={i} cx={cx} cy={cy} r={s.size / 3} fill="none" stroke={s.color} strokeOpacity={s.alpha} />
         ) : (
           <circle key={i} cx={cx} cy={cy} r={s.size / 3.4} fill={s.color} fillOpacity={s.alpha} />
         );
       })}
+      {weeks.map((w, wi) => (
+        <text key={w} x={g.cx + (wi + 1 - (weeks.length + 1) / 2) * COL * g.sx} y={floorY + 52} textAnchor="middle" fill="#8e8a80" style={{ font: `500 ${g.label}px var(--mono)`, letterSpacing: "0.08em" }}>
+          WEEK {w}
+        </text>
+      ))}
     </svg>
   );
 }
