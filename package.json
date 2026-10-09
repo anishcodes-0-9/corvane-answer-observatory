@@ -1,0 +1,22 @@
+{
+  "name": "corvane-visibility-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI visibility tracker for Corvane Fleet (case study).",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "data-quality": "tsx scripts/data-quality.ts"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "4.1.11"
+  }
+}

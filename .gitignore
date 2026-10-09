@@ -1,0 +1,5 @@
+node_modules/
+# The data pack stays outside the repository; point DATA_DIR at it instead.
+data/
+.DS_Store
+*.log
