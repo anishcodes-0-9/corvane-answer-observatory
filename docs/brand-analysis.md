@@ -151,3 +151,23 @@ company, use the tone of its final verdict on that company." Implemented in
 - When one sentence names two brands, both get its verdict.
 - The phrase lists are English-only and won't catch every phrasing.
 - Accuracy on real answers is measured by the manual audit, not assumed.
+
+## mentions.csv
+
+`npm run export` writes `out/mentions.csv` with exactly the brief's columns
+`response_id,brand,mentioned,position,tone`: six rows per retained response,
+in brand order corvane, trakvia, routelyne, gridwell, fleetora, novahaul.
+
+- `mentioned` is `true`/`false`. `position` and `tone` are blank when not mentioned.
+- **Collector errors (decided):** a response with no analysable answer text
+  (3 timeouts in the case-study data) still gets its six rows, with
+  `mentioned=false` and blank position and tone. The brief asks for "one row
+  for every answer and every company", and the data pack calls each line "one
+  AI answer". The analysis artifact and coverage report keep these responses
+  as `not_analyzed`, so an error is never presented elsewhere as a verified
+  absence.
+- Exact duplicate records share a `response_id`, so they appear once.
+- The export refuses to write if the input is not fully accounted for, the
+  brand configuration is invalid, or any row breaks the schema: the wrong
+  number of rows, positions that aren't 1..n, or a missing or stray
+  position/tone.

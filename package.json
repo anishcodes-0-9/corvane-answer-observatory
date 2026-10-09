@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "data-quality": "tsx scripts/data-quality.ts",
-    "brand-analysis": "tsx scripts/brand-analysis.ts"
+    "brand-analysis": "tsx scripts/brand-analysis.ts",
+    "export": "tsx scripts/export.ts"
   },
   "devDependencies": {
     "@types/node": "24.19.1",
