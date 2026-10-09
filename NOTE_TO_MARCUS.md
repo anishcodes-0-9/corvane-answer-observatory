@@ -9,10 +9,12 @@ week 6. No single week's move is bigger than the normal difference between
 two runs of the same question, though, so please don't react to any one
 week's number. Trakvia edged ahead in week 6 (44 to Corvane's 36).
 
-**The one change that is real.** On Google's AI Overviews, Corvane's score on
-the same questions fell from 45 to 19 between week 1 and week 6. That drop is
-larger than the run-to-run noise. ChatGPT went the other way (33 to 56), but
-not yet clearly enough to call.
+**One signal worth investigating.** On Google's AI Overviews, Corvane's score
+on the same questions fell from 45 to 19 between week 1 and week 6. That is
+larger than the run-to-run noise. However, I found it by splitting the data by
+engine after looking at it, and the dashboard's week-on-week checks don't test
+it. Treat it as a lead to check over the next few weeks, not a confirmed
+trend. ChatGPT went the other way (33 to 56), but not clearly enough to call.
 
 **What the answers get wrong.** 47 answers state something false about
 Corvane, and the same few errors keep repeating:
@@ -24,8 +26,8 @@ Corvane, and the same few errors keep repeating:
 - built-in dashcams, which Corvane doesn't have;
 - no QuickBooks integration, when Corvane has one.
 
-The ELD and price errors cost you the most: they rule Corvane out for exactly
-the buyers it suits.
+The ELD and price errors matter most, because they could put off exactly the
+buyers Corvane suits.
 
 **What I'd do first.**
 
@@ -34,12 +36,14 @@ the buyers it suits.
    card in the dashboard lists the sources behind it.
 2. Go after the price questions. Corvane rarely appears for "How much does
    fleet GPS tracking cost per vehicle?" (1 of 6 answers) or "cheapest GPS
-   fleet tracking" (2 of 6). Among the companies we have facts for, it is the
-   cheapest one that includes ELD compliance.
-3. Watch Google AI Overviews weekly. Its drop and its ELD error may be
-   connected.
+   fleet tracking" (2 of 6). Routelyne is cheaper ($19), but among the
+   companies we have facts for, Corvane is the cheapest that includes ELD
+   compliance. That makes the price questions a natural fit.
+3. Watch Google AI Overviews weekly to see whether its drop holds. The data
+   doesn't show why it fell, so I wouldn't attribute it to any one error.
 
 **Caveats.** Week 5 is missing Perplexity, so that week is compared only on
 the engines it has. Each question runs twice a week, which is why small moves
-read as noise. The analysis is rules-based, and a hand check of 15 random answers
-measures its accuracy (see the README).
+read as noise. The analysis is rules-based. On a hand check of 15 random
+answers, it agreed with me on every company mention and position, and on 39
+of 41 tone judgements. That sample is small (see the README).

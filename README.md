@@ -18,7 +18,7 @@ at run time, and every number traces back to a specific answer.
 
 ## Run it
 
-Requires Node 20+.
+Requires Node 20.9 or newer (the minimum for Next.js 16).
 
 ```bash
 npm install
@@ -82,7 +82,9 @@ Results on the case-study data:
     for every answer", and the pack calls each line "one AI answer".
   - Everywhere else (scores, coverage, the dashboard) they are "not analysed",
     never "not mentioned".
-- **Duplicates.** The 8 exact duplicate records are counted once.
+- **Duplicates.** The 8 exact duplicate records are counted once. The pack's
+  518 records therefore give 510 unique answers, of which 507 can be analysed
+  (the other 3 are timeouts).
 - **Weeks and dates.** Weeks come from the `week` field, never from
   timestamps. Week 4's dates are read as DD/MM, because only that order fits
   between weeks 3 and 5.
@@ -130,7 +132,10 @@ At each step, being honest about uncertainty came before features:
 **Stretch items:**
 
 - **Done:** the detail view (answers page with filters and highlighted
-  mentions, claims and citations), and a no-hard-coding brand config.
+  mentions, claims and citations), and a brand config (names, aliases, decoys,
+  fuzzy rules) read from JSON. A few lists are still hard-coded: the tracked
+  companies in the dashboard, the audit's company columns, and the brands
+  whose wrong facts are exported.
 - **Partly done:**
   - competitor fact-checking (implemented, not exported);
   - the sources view (cited domains appear per answer and per wrong fact, but
@@ -149,10 +154,46 @@ At each step, being honest about uncertainty came before features:
 - **Mutation checks:** for key rules, deliberately broken versions are caught
   by the tests.
 
-**Manual audit of 15 random answers: pending.** The sample is drawn (seed
-`corvane-manual-audit-v1`) and the blind sheet is ready. Results will be added
-here from `validation/manual-review-results.md` once the hand labels are
-complete. No accuracy figure is claimed before then.
+**Manual audit of 15 random answers.**
+
+- The 15 answers were drawn at random (seed `corvane-manual-audit-v1`) from
+  the 507 analysable answers.
+- I labelled them by hand, using the brief's definitions, before looking at
+  the tool's output; the predictions sat in a separate file.
+- Full results are in
+  [validation/manual-review-results.md](validation/manual-review-results.md).
+  The labelling sheets contain answer text, so they are not in the repo.
+
+| Measure | All 15 answers | Excluding the 1 I marked ambiguous |
+|---|---|---|
+| Mentions (answer × company cells) | 90/90 | 84/84 |
+| Mention precision / recall | 1.000 / 1.000 | 1.000 / 1.000 |
+| Position, where both found the company | 41/41 | 38/38 |
+| Tone, where both found the company | 39/41 (95.1%) | 37/38 (97.4%) |
+
+Where it went wrong (both are tone):
+
+- `r_4ac2f20f0ff9`, Routelyne: I labelled `recommended`, the tool said
+  `neutral`. The answer praises Routelyne's features without using a
+  recommendation phrase the tone rules recognise.
+- `r_aee5a16d9acc`, Corvane (marked ambiguous): I labelled `neutral`, the tool
+  said `negative`. The answer mixes praise with a complaint. The tool took the
+  complaint as the final verdict; I saw no clear final verdict.
+
+What this sample can and can't show:
+
+- **Fifteen answers is small.** It gives 90 mention cells but only 41 tone
+  judgements. 95% Wilson intervals: mentions 95.9–100%, tone 83.9–98.7%.
+- **One labeller** (me), with no second reviewer, so label noise is not
+  measured.
+- **Wrong facts were not scored.** The audit sheet has no fact columns, so
+  there is no precision or recall for them. As an informal check, my notes
+  flagged one wrong claim about Corvane in the sample (a Chicago headquarters
+  in `r_f0c9f5405128`). The tool exported exactly that row and no other
+  Corvane rows for these 15 answers. My notes also flagged Routelyne ELD
+  claims that contradict `facts.json`; competitor facts are out of the
+  exported scope.
+- **No week-3 answers** happened to be drawn.
 
 Known weak spots to look for:
 
@@ -164,9 +205,10 @@ Known weak spots to look for:
 ## How AI coding tools were used
 
 I built this with Claude Code. I set the requirements and priorities, reviewed
-plans before code was written, approved every milestone, and made all commits
-under my own identity. Claude wrote most of the code and tests and ran the
-checks. Verification relied on:
+plans before code was written, and approved every milestone before it was
+committed. Claude wrote most of the code and tests, ran the checks, and ran the
+`git commit` commands under my Git identity once I approved each milestone. I
+labelled the 15-answer accuracy audit myself. Verification relied on:
 
 - tests and mutation checks;
 - an independent oracle;
@@ -206,13 +248,19 @@ checks. Verification relied on:
   - On phones, the field sat behind the headline.
   - The Next.js dev server generated `AGENTS.md` and `CLAUDE.md` files in the
     repo; generation is now disabled.
+- **Test fixtures.** Some fact-check tests reused sentences copied from the
+  data pack, despite the instruction to use synthetic text. A pre-submission
+  audit found them, and they were replaced with synthetic sentences.
+- **Mobile layout.** Below 1080px the 3D field sat above the headline, small
+  and off to one side, and the market table dropped two columns on phones.
+  Both were fixed after a review at 320–1440px.
 - **Process.** The AI's early time estimates were off by about 30 minutes.
 
 ## Running this every day for 20 clients
 
 **Cost.**
 
-- Analysis is cheap. The full pipeline for one client's six weeks (518 answers)
+- Analysis is cheap. The full pipeline for one client's six weeks (518 records)
   takes about 0.2 seconds on a laptop CPU, with no model or API costs.
 - Twenty clients run nightly on one small VM or a scheduled serverless job, in
   minutes.
